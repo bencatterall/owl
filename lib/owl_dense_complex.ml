@@ -8,16 +8,44 @@
 open Bigarray
 open Owl_types
 
-type mat = Gsl.Matrix_complex.matrix
 
-type elt = Complex.t
+module CommonImpl = struct
 
-let shape x = (Array2.dim1 x, Array2.dim2 x)
+  type elt = Complex.t
 
-let create m n v = Gsl.Matrix_complex.create ~init:v m n
+  type prc = complex64_elt
 
-let empty m n = Gsl.Matrix.create m n
+  type mat = Gsl.Matrix_complex.matrix
 
-let zeros m n = create m n Complex.zero
+  let const_0 = Complex.zero
+
+  let const_1 = Complex.one
+
+  let empty m n = Gsl.Matrix_complex.create m n
+
+  let create m n v = Gsl.Matrix_complex.create ~init:v m n
+
+end
+
+include CommonImpl
+include Owl_matrix.Common (CommonImpl)
+
+let sequential m n =
+  let x = empty m n and c = ref const_0 in
+  for i = 0 to m - 1 do
+    for j = 0 to n - 1 do
+      c := Complex.(add !c const_1);
+      x.{i,j} <- !c
+    done
+  done; x
+
+let linspace a b n =
+  let x = empty 1 n in
+  let c = ((b -. a) /. (float_of_int (n - 1))) in
+  for i = 0 to n - 1 do
+    let d = a +. c *. (float_of_int i) in
+     x.{0,i} <- Complex.({re = d; im = 0.})
+  done; x
+
 
 let pp_dsmat_complex x = Format.printf "%a\n" Owl_pretty.Toplevel.pp_cmat x
