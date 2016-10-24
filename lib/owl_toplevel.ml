@@ -11,7 +11,7 @@ type t =
   | Lapply of t * t
 
 let printers = [
-  Obj.magic (Ldot (Lident "Owl_dense",  "pp_dsmat"));
+  Obj.magic (Ldot (Lident "Owl_dense_real",  "pp_dsmat"));
   Obj.magic (Ldot (Lident "Owl_sparse", "pp_spmat"));
   Obj.magic (Ldot (Lident "Owl_dense_complex",  "pp_dsmat_complex"));
 ]

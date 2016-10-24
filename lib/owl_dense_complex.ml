@@ -3,7 +3,7 @@
  * Copyright (c) 2016 Liang Wang <liang.wang@cl.cam.ac.uk>
  *)
 
-(** [ Dense complex matrix ]  *)
+(** [ Complex dense matrix ]  *)
 
 open Bigarray
 open Owl_types
