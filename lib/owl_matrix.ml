@@ -163,6 +163,7 @@ module Common (MatrixImpl : MatrixSig) = struct
     let y = clone x in
     copy_col_to v y i; y
 
+
   (* matrix iteration operations *)
 
   let iteri f x =

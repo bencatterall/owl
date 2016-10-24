@@ -40,6 +40,7 @@ end
 include CommonImpl
 include Owl_matrix.Common (CommonImpl)
 
+
 let sequential m n =
   let x = empty m n and c = ref const_0 in
   for i = 0 to m - 1 do
