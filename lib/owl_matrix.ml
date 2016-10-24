@@ -17,6 +17,14 @@ module type MatrixSig = sig
 
   val create : int -> int -> elt -> mat
 
+  val swap_rows: mat -> int -> int -> unit
+
+  val swap_cols: mat -> int -> int -> unit
+
+  val swap_rowcol : mat -> int -> int -> unit
+
+  val transpose : mat -> mat
+
 end
 
 
@@ -79,7 +87,7 @@ module Common (MatrixImpl : MatrixSig) = struct
     let m, n = shape x in
     let y = empty m 1 in
     for i = 0 to m - 1 do
-      set y i 0 (get x i j)
+      Array2.unsafe_set y i 0 (Array2.unsafe_get x i j)
     done; y
 
   let copy_area_to x1 r1 x2 r2 =
@@ -146,16 +154,6 @@ module Common (MatrixImpl : MatrixSig) = struct
     let m, n = row_num x, Array.length (l) in
     let y = empty m n in
     Array.iteri (fun i j -> copy_col_to (col x j) y i) l; y
-
-  let swap_rows = Gsl.Matrix.swap_rows
-
-  let swap_cols = Gsl.Matrix.swap_columns
-
-  let swap_rowcol = Gsl.Matrix.swap_rowcol
-
-  let transpose x =
-    let y = empty (col_num x) (row_num x) in
-    Gsl.Matrix.transpose y x; y
 
   let replace_row v x i =
     let y = clone x in

@@ -25,6 +25,16 @@ module CommonImpl = struct
 
   let create m n v = Gsl.Matrix_complex.create ~init:v m n
 
+  let swap_rows = Gsl.Matrix_complex.swap_rows
+
+  let swap_cols = Gsl.Matrix_complex.swap_columns
+
+  let swap_rowcol = Gsl.Matrix_complex.swap_rowcol
+
+  let transpose x =
+    let y = empty (Array2.dim2 x) (Array2.dim1 x) in
+    Gsl.Matrix_complex.transpose y x; y
+
 end
 
 include CommonImpl
