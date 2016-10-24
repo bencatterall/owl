@@ -7,9 +7,7 @@
 
 module Const = Owl_const
 
-(*module Dense = Owl_dense*)
-
-module Dense_complex = Owl_dense_complex
+module Dense = Owl_dense
 
 module Sparse = Owl_sparse
 
