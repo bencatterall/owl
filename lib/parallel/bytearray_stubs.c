@@ -2,18 +2,12 @@
 /* Copyright Jérôme Vouillon 1999-2010 (see LICENCE for distribution conditions) */
 
 #include <string.h>
-#include <unistd.h>
 
 #include "caml/intext.h"
 #include "caml/bigarray.h"
 
 #define Array_data(a, i) (((char *) a->data) + Long_val(i))
 #define Floatarray_data(a, i) (((char *) a->data) + 8 * Long_val(i))
-
-CAMLprim value numcores(value unit) {
-  int numcores = sysconf( _SC_NPROCESSORS_ONLN );
-  return Val_int(numcores);
-}
 
 CAMLprim value ml_marshal_to_bigarray(value v, value flags)
 {

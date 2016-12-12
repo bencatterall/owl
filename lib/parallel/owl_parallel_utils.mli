@@ -6,5 +6,4 @@ val range : int -> int -> int list
 val tempfd : unit -> Unix.file_descr
 
 val numcores : unit -> int
-
 val setcore : int -> unit

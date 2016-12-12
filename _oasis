@@ -45,7 +45,7 @@ Library owl_parallel
   Install:          true
   Path:             lib/parallel
   Modules:          Bytearray, Owl_parallel, Owl_parallel_utils
-  CSources:         bytearray_stubs.c
+  CSources:         bytearray_stubs.c, setcore_stubs.c, config.h
   CCOpt:            -D_GNU_SOURCE -fPIC
   BuildDepends:     unix, dolog
 

@@ -48,3 +48,4 @@ let tempfd () =
 let setcore i = ()
 
 external numcores: unit -> int = "numcores"
+external setcore: int -> unit = "setcore"

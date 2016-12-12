@@ -12,7 +12,7 @@ external sys_exit : int -> 'a = "caml_sys_exit"
 
 let _ = Log.color_on (); Log.(set_log_level INFO)
 
-let default_ncores = Utils.numcores () - 1
+let default_ncores = 1
 
 let marshal fd v =
   let s = Marshal.to_string v [Marshal.Closures] in
@@ -84,6 +84,7 @@ let simplemapper ncores compute opid x =
   Gc.compact ();
   (* run children *)
   run_many ncores ~in_subprocess:(fun i ->
+    Utils.setcore i;
     let lo = i * chunksize in
     let hi = if i = ncores - 1 then ln - 1 else (i + 1) * chunksize - 1 in
     let exc_handler e j = (* handle an exception at index j *)
